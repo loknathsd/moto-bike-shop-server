@@ -12,10 +12,7 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors())
 
-
-
-
-
+//mongodb connection
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
     const productCollection = client.db("motoBikeStore").collection("products");
@@ -38,7 +35,6 @@ client.connect(err => {
             
         })
     })
-
     app.post('/addProduct', (req, res) => {
         const product = req.body;
         productCollection.insertOne(product)
@@ -46,7 +42,6 @@ client.connect(err => {
                 res.send(result.insertedCount >0 )
             })
     })
-
     app.post('/addPurchase',(req,res)=>{
         const order = req.body
         orderCollection.insertOne(order)
@@ -54,7 +49,6 @@ client.connect(err => {
            res.send(result.insertedCount >0)
         })
     })
-
     app.post('/addReview',(req,res)=>{
         const review = req.body;
         reviewCollection.insertOne(review)
@@ -63,7 +57,6 @@ client.connect(err => {
         })
 
     })
-
     app.get('/reviews',(req,res)=>{
         reviewCollection.find({})
         .toArray((err,documents)=>{
@@ -112,9 +105,6 @@ client.connect(err => {
     })
 
 });
-
-
-
 
 
 app.get('/', (req, res) => {
