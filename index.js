@@ -6,14 +6,14 @@ const ObjectId = require('mongodb').ObjectId
 require('dotenv').config()
 
 const port = 5000
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.vfsjf.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 const app = express()
 app.use(bodyParser.json())
 app.use(cors())
+console.log(process.env.DB_URL)
 
 //mongodb connection
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const client = new MongoClient(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
     const productCollection = client.db("motoBikeStore").collection("products");
     const orderCollection = client.db("motoBikeStore").collection("orders");
