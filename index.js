@@ -1,16 +1,15 @@
-const express = require('express')
+const express = require('express');
 const { MongoClient } = require('mongodb');
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const ObjectId = require('mongodb').ObjectId
-require('dotenv').config()
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const ObjectId = require('mongodb').ObjectId;
+require('dotenv').config();
 
 const port = 5000
 
-const app = express()
-app.use(bodyParser.json())
-app.use(cors())
-console.log(process.env.DB_URL)
+const app = express();
+app.use(bodyParser.json());
+app.use(cors());
 
 //mongodb connection
 const client = new MongoClient(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
